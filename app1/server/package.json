@@ -1,0 +1,20 @@
+{
+  "name": "test-app",
+  "version": "0.1.0",
+  "author": "Stéphane Fidanza <stephane.fidanza@gmail.com>",
+  "description": "Testing node inside a docker container",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "scripts": {
+    "start": "node --experimental-json-modules src/index.js",
+    "debug": "nodemon --inspect=0.0.0.0:9229 --legacy-watch --experimental-json-modules src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "src/index.js",
+  "type": "module",
+  "license": "MIT"
+}

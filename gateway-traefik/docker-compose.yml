@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  traefik:
+    image: traefik:latest
+    command:
+      # - --configFile=/etc/traefik/static.yml
+      - --providers.file.filename=/etc/traefik/dynamic.yml
+      - --providers.file.watch=true
+      - --providers.docker.swarmMode=true
+      - --providers.docker.exposedByDefault=false
+      - --providers.docker.network=gateway
+      # Entry points configuration
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      # Let's Encrypt configuration
+      - --certificatesresolvers.myresolver.acme.email=me@email.com
+      - --certificatesresolvers.myresolver.acme.storage=acme.json
+      - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory # Staging server (comment it to use production server)
+      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+      # debug
+      - --api.insecure=true
+      # - --log.level=DEBUG
+      # - --accesslog
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Port for the Web UI (enabled by --api.insecure=true)
+    volumes:
+      - ./config:/etc/traefik:ro
+      - //var/run/docker.sock:/var/run/docker.sock:ro  # Traefik listens to Docker events
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - gateway
+  
+networks:
+  gateway:
+    external: true
+    name: gateway

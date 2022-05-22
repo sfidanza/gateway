@@ -1,0 +1,38 @@
+providers:
+  docker:
+    swarmMode: true
+    exposedByDefault: false
+    network: gateway
+
+  file:
+    filename: "/etc/traefik/dynamic.yml"
+    watch: true
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: "websecure"
+          scheme: "https"
+  websecure:
+    address: ":443"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: me@email.com
+      storage: acme.json
+      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # Staging server (comment it to use production server)
+      httpChallenge:
+        entryPoint: web
+
+# ===== DEBUG =====
+api:
+  insecure: true
+
+# log:
+#   level: DEBUG
+
+# accesslog:

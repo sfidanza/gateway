@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  nginx:
+    image: bitnami/nginx:latest
+    volumes:
+      - ./client/src:/var/www/html
+      - ./client/sites-available/:/opt/bitnami/nginx/conf/server_blocks/
+
+  app:
+    image: sfidanza/test-app
+    volumes:
+      - ./server:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    environment:
+      - NODE_PORT=9090
+
+volumes:
+  node_modules:

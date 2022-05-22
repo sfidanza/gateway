@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  nginx:
+    image: bitnami/nginx:latest
+    volumes:
+      - ./client/src:/var/www/html
+      - ./client/sites-available/:/opt/bitnami/nginx/conf/server_blocks/

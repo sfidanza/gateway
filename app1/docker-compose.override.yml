@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  nginx:
+    # build: ./client
+    # volumes:
+    #   - ./client/src:/var/www/html
+    ports:
+      - "9080:80"
+
+  app:
+    build: ./server
