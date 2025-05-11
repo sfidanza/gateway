@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/hello', hello());
 
-app.listen(NODE_PORT, function () {
-	console.log(`App listening on port ${NODE_PORT}!`);
+app.listen(NODE_PORT, (error) => {
+			if (error) throw error;
+			console.log(`App listening on port ${NODE_PORT}!`);
 });
