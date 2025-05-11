@@ -18,7 +18,7 @@ The gateway needs an overlay network to communicate with services endpoints. It 
     # Undeploy
     docker stack rm gateway
 
-The Traefik web UI can be accessed at <http://localhost:8080> (or <http://[IP-ADDRESS]:8080>), if it is enabled in `docker-compose` (`api.insecure=true`). It will list services as they are discovered and exposed.
+The Traefik web UI can be accessed at <http://localhost:8080> (or <http://[IP-ADDRESS]:8080>), if it is enabled in `docker-compose.yml` (`api.insecure=true`). It will list services as they are discovered and exposed.
 
 ## Deploy services
 
@@ -53,8 +53,8 @@ This local deployment may need the following entries in your `hosts` file:
 
 Working on `app` in local dev does not require `gateway` to be deployed. From the `app` folder:
 
-    docker-compose up -d --build
-    docker-compose down
+    docker compose up -d --build
+    docker compose down
 
 The reason is the `docker-compose.override.yml` that defines an external port on the host to reach the service directly. In production deployment, this port is not exposed and the service can only be accessed through the gateway.
 
