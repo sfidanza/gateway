@@ -5,9 +5,8 @@ services:
       # - --configFile=/etc/traefik/static.yml
       - --providers.file.filename=/etc/traefik/dynamic.yml
       - --providers.file.watch=true
-      - --providers.docker.swarmMode=true
-      - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=gateway
+      - --providers.swarm.exposedByDefault=false
+      - --providers.swarm.network=gateway
       # Entry points configuration
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure

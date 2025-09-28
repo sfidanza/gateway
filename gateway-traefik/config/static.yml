@@ -1,6 +1,5 @@
 providers:
-  docker:
-    swarmMode: true
+  swarm:
     exposedByDefault: false
     network: gateway
 
