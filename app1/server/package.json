@@ -4,7 +4,7 @@
   "author": "Stéphane Fidanza <stephane.fidanza@gmail.com>",
   "description": "Testing node inside a docker container",
   "dependencies": {
-    "express": "5.2.1"
+    "express": "5.3.0"
   },
   "devDependencies": {
     "nodemon": "3.1.14"
